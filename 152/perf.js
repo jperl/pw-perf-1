@@ -9,9 +9,9 @@ const { chromium } = require("playwright");
     total: [],
   };
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 10; i++) {
     const a = Date.now();
-    const browser = await chromium.launch();
+    const browser = await chromium.launch({ headless: false });
     timing.launchBrowser.push(Date.now() - a);
 
     const b = Date.now();
@@ -33,8 +33,6 @@ const { chromium } = require("playwright");
 
   Object.keys(timing).forEach((key) => {
     const times = timing[key];
-    console.log(
-      `time to ${key}: ${times.reduce((a, b) => a + b) / times.length}`
-    );
+    console.log(`${key}: ${times.reduce((a, b) => a + b) / times.length}`);
   });
 })();
